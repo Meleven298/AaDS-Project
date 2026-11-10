@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="utf-8">
+    <title>Проект по АиСД</title>
+    <style>
+        body { font-family: sans-serif; max-width: 700px; margin: 40px auto; padding: 0 20px; }
+        nav a { margin-right: 16px; }
+        td, th { border: 1px solid #ccc; padding: 4px 10px; text-align: left; }
+        table { border-collapse: collapse; }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="/">Главная</a>
+        <a href="/search">Поиск</a>
+        <a href="/segment">Оценки по времени</a>
+    </nav>
+    <hr>
+    {% block content %}{% endblock %}
+</body>
+</html>
