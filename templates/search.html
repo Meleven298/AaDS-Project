@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Поиск оценки по rating_id</h1>
+
+<form method="get" action="/search">
+    <input type="number" name="rating_id" required>
+    <button>Найти</button>
+</form>
+
+{% if rating_id is not none %}
+    {% if row %}
+        <table>
+        {% for name, value in row.items() %}
+            <tr><th>{{ name }}</th><td>{{ value }}</td></tr>
+        {% endfor %}
+        </table>
+        <p>Хеш-таблица: {{ "%.4f"|format(hash_ms) }} мс<br>
+           Линейный поиск: {{ "%.4f"|format(linear_ms) }} мс</p>
+    {% else %}
+        <p>Записи с таким id нет.</p>
+    {% endif %}
+{% endif %}
+{% endblock %}
