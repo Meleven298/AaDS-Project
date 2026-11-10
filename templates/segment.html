@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block content %}
+<h1>Оценки по времени</h1>
+<p>Всего оценок: {{ n }}. Они стоят по порядку времени, номера от 0 до {{ n - 1 }}.</p>
+
+<h3>Сумма оценок на отрезке</h3>
+<form method="get" action="/segment">
+    L <input type="number" name="l" required>
+    R <input type="number" name="r" required>
+    <button>Посчитать</button>
+</form>
+{% if result is not none %}
+    <p>Сумма: {{ result }}, средняя: {{ "%.3f"|format(result / (r - l + 1)) }}</p>
+{% endif %}
+
+<h3>Изменить оценку</h3>
+<form method="post" action="/segment/update">
+    номер <input type="number" name="i" required>
+    новая оценка <input type="number" name="x" step="0.5" min="0.5" max="5" required>
+    <button>Изменить</button>
+</form>
+
+{% if error %}<p style="color: red">{{ error }}</p>{% endif %}
+{% if message %}<p style="color: green">{{ message }}</p>{% endif %}
+{% endblock %}
