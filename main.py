@@ -14,11 +14,9 @@ templates = Jinja2Templates(directory="templates")
 
 df = pd.read_csv("data/data.csv", parse_dates=["created_at"])
 
-# хеш-таблица: rating_id -> номер строки
 keys = df["rating_id"].tolist()
 hash_index = build_hash_index(keys)
 
-# дерево отрезков по оценкам, отсортированным по времени
 df_by_time = df.sort_values("created_at").reset_index(drop=True)
 tree = SegmentTree(df_by_time["rating"].tolist())
 
@@ -38,11 +36,11 @@ def search(request: Request, rating_id: int | None = None):
 
     if rating_id is not None:
         start = perf_counter()
-        row_id = hash_index.get(rating_id)           # быстрый поиск
+        row_id = hash_index.get(rating_id)      
         hash_ms = (perf_counter() - start) * 1000
 
         start = perf_counter()
-        linear_search(keys, rating_id)               # медленный поиск, для сравнения
+        linear_search(keys, rating_id)    
         linear_ms = (perf_counter() - start) * 1000
 
         if row_id is not None:
